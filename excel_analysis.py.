@@ -1,0 +1,21 @@
+import pandas as pd
+
+print("--- Reading Client Excel File ---")
+
+# 1. READ the Excel File
+# Note: We use 'read_excel' instead of 'read_csv'
+df = pd.read_excel('client_sales.xlsx')
+
+# 2. CALCULATE Profit
+# Profit = Price - Cost
+df['Profit'] = df['Price'] - df['Cost']
+
+# 3. SUMMARIZE by Product
+# "Group by Product, Sum the Profit, and Sort it"
+summary = df.groupby('Product')['Profit'].sum().sort_values(ascending=False)
+
+print(summary)
+
+# 4. EXPORT the result
+summary.to_excel('profit_report.xlsx')
+print("\n✅ Analysis done! Saved 'profit_report.xlsx'.")
